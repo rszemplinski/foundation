@@ -47,7 +47,6 @@
             system = "x86_64-linux";
             modules = [
               { networking.hostName = host; }
-              (callModule ./hosts/common.nix)
               (callModule module)
             ];
           };
