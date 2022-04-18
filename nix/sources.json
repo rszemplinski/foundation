@@ -1,161 +1,94 @@
 {
-    "clipnotify": {
-        "branch": "master",
-        "description": "Notify on new X clipboard events",
-        "homepage": null,
-        "owner": "andreblanke",
-        "repo": "clipnotify",
-        "rev": "2aec101d4e87ca0d0d540b4d22ec991c8dbf001a",
-        "sha256": "05s7182rgyli2rqyj76v3j256x6h87jx3pfh9mnfkfpg88mbikzs",
-        "type": "tarball",
-        "url": "https://github.com/andreblanke/clipnotify/archive/2aec101d4e87ca0d0d540b4d22ec991c8dbf001a.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "evilhack": {
-        "sha256": "03jkdxygf1gyhiphvr86sc7w5kr3l6hy3c4486zs3aqpqxmy5dh1",
-        "type": "tarball",
-        "update_type": "github-release",
-        "url": "https://github.com/k21971/EvilHack/archive/refs/tags/v0.7.1.tar.gz",
-        "url_template": "https://github.com/k21971/EvilHack/archive/refs/tags/v<version>.tar.gz",
-        "version": "0.7.1"
-    },
-    "flake-compat": {
-        "branch": "master",
-        "description": null,
-        "homepage": null,
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "rev": "64a525ee38886ab9028e6f61790de0832aa3ef03",
-        "sha256": "1ikgans7zqk7c6lj7p0bmd3lr84g6xn7jgm13dj518cg5mscl0r7",
-        "type": "tarball",
-        "url": "https://github.com/edolstra/flake-compat/archive/64a525ee38886ab9028e6f61790de0832aa3ef03.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "git-fuzzy": {
-        "branch": "master",
-        "description": "interactive `git` with the help of `fzf`",
-        "homepage": "",
-        "owner": "bigH",
-        "repo": "git-fuzzy",
-        "rev": "6bf6db61d3bd9a16203130587ccfbc02f4ca9a57",
-        "sha256": "1iivvh1sbfw1h8klcwrhxs4g9cbifg0g2gp0fc8a16qy8dq45mzm",
-        "type": "tarball",
-        "url": "https://github.com/bigH/git-fuzzy/archive/6bf6db61d3bd9a16203130587ccfbc02f4ca9a57.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "git-trim": {
-        "branch": "master",
-        "description": "Utility to delete git branches interactively",
-        "homepage": null,
-        "owner": "dstnbrkr",
-        "repo": "git-trim",
-        "rev": "68322f146a443937e8f59aab4fa3dd0eb976a4db",
-        "sha256": "1y1z6hzfhs42pwkhwfa8qh1508rhx23idnnq1zmaabxyjkh42v01",
-        "type": "tarball",
-        "url": "https://github.com/dstnbrkr/git-trim/archive/68322f146a443937e8f59aab4fa3dd0eb976a4db.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "jitsi-meet": {
-        "branch": "ed9b85f2877f36505e258354433d6cd23b7824f3",
-        "description": "Jitsi Meet - Secure, Simple and Scalable Video Conferences that you use as a standalone app or embed in your web application.",
-        "homepage": "https://jitsi.org/meet",
-        "owner": "jitsi",
-        "repo": "jitsi-meet",
-        "rev": "ed9b85f2877f36505e258354433d6cd23b7824f3",
-        "sha256": "175vi3r88sar2a55h2ik5gw0chdpffcyvs02a9c73s3xn0cfg3cd",
-        "type": "tarball",
-        "url": "https://github.com/jitsi/jitsi-meet/archive/ed9b85f2877f36505e258354433d6cd23b7824f3.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "jsonc.vim": {
-        "branch": "master",
-        "description": "jsonc syntax support for vim",
-        "homepage": null,
-        "owner": "neoclide",
-        "repo": "jsonc.vim",
-        "rev": "b87595ba7f3fa4bdcc8803a2ec72574719fc9fd6",
-        "sha256": "02bgqxi20lmq97s9nnsb1mmjp45fh5a9pbhbs6hl2zmb03spbvpi",
-        "type": "tarball",
-        "url": "https://github.com/neoclide/jsonc.vim/archive/b87595ba7f3fa4bdcc8803a2ec72574719fc9fd6.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "nix-index-database": {
-        "sha256": "08nhi8j2vynfscim2mdaq3dzh5qb91xlk7mp72s6fhvljx54qxwm",
-        "type": "file",
-        "update_type": "github-release",
-        "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-04-10/index-x86_64-linux",
-        "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
-        "version": "2022-04-10"
-    },
-    "npmlock2nix": {
-        "branch": "master",
-        "description": null,
-        "homepage": null,
-        "owner": "tweag",
-        "repo": "npmlock2nix",
-        "rev": "dd2897c3a6e404446704a63f40b9a29fa0acf752",
-        "sha256": "1qim1466qi8a4cz6qh3cwrdkxrrwvrkvrn2gxjlqa5jxvc39cv8v",
-        "type": "tarball",
-        "url": "https://github.com/tweag/npmlock2nix/archive/dd2897c3a6e404446704a63f40b9a29fa0acf752.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "olivetin": {
-        "sha256": "0j77bqglkdwwxypm5ag6hmq5ipykl5mcl4zqp3wb3di90ayhyjbd",
-        "type": "tarball",
-        "update_type": "github-release",
-        "url": "https://github.com/OliveTin/OliveTin/releases/download/2022-04-07/OliveTin-2022-04-07-linux-amd64.tar.gz",
-        "url_template": "https://github.com/OliveTin/OliveTin/releases/download/<version>/OliveTin-<version>-linux-amd64.tar.gz",
-        "version": "2022-04-07"
-    },
-    "r2modman": {
-        "sha256": "06byhwmg38vxpj10pv8hcisan51gvzvk5n4j9rs9xdlanxx1ci0i",
-        "type": "file",
-        "update_type": "github-release",
-        "url": "https://github.com/ebkr/r2modmanPlus/releases/download/v3.1.27/r2modman-3.1.27.AppImage",
-        "url_template": "https://github.com/ebkr/r2modmanPlus/releases/download/v<version>/r2modman-<version>.AppImage",
-        "version": "3.1.27"
-    },
-    "ranger_devicons": {
-        "branch": "main",
-        "description": "Ranger plugin that adds file glyphs / icon support to Ranger",
-        "homepage": "",
-        "owner": "alexanderjeurissen",
-        "repo": "ranger_devicons",
-        "rev": "df583d66ed093849248c2cf1631bce15d01b30e1",
-        "sha256": "1xg2lhf5n7cj0qcxrlb9x29ysf5kg0hwskgg9hdmrqh3203n50jw",
-        "type": "tarball",
-        "url": "https://github.com/alexanderjeurissen/ranger_devicons/archive/df583d66ed093849248c2cf1631bce15d01b30e1.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "slapper": {
-        "branch": "master",
-        "description": "Simple load testing tool with real-time updated histogram of request timings",
-        "homepage": "",
-        "owner": "ikruglov",
-        "repo": "slapper",
-        "rev": "552f8a34ae9ff4c74dfa7c83c62cda6028ae2f29",
-        "sha256": "0zaz30mkmnahvv79j59bx1c6d6l9i0729qqfbmijpr44h8q5gxvk",
-        "type": "tarball",
-        "url": "https://github.com/ikruglov/slapper/archive/552f8a34ae9ff4c74dfa7c83c62cda6028ae2f29.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "vim-anyfold": {
-        "branch": "master",
-        "description": "Language agnostic vim plugin for folding and motion based on indentation.",
-        "homepage": "",
-        "owner": "pseewald",
-        "repo": "vim-anyfold",
-        "rev": "3ed5d8ccbf0f5031f7c7d2be05aa7ddb4550dc5c",
-        "sha256": "14grfm5vra2lrnilsf6gbfmvn6v4pbi1l94ac713qac592fjq5kv",
-        "type": "tarball",
-        "url": "https://github.com/pseewald/vim-anyfold/archive/3ed5d8ccbf0f5031f7c7d2be05aa7ddb4550dc5c.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "waterfox": {
-        "sha256": "1kbil4z6rnsrl4ik8yjiq7riak2w64ca3f822sgx4bb86cqr6vp5",
-        "type": "tarball",
-        "url": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-G4.1.1.en-US.linux-x86_64.tar.bz2",
-        "url_template": "https://cdn.waterfox.net/releases/linux64/installer/waterfox-<version>.en-US.linux-x86_64.tar.bz2",
-        "version": "G4.1.1"
-    }
+  "flake-compat": {
+    "branch": "master",
+    "description": null,
+    "homepage": null,
+    "owner": "edolstra",
+    "repo": "flake-compat",
+    "rev": "64a525ee38886ab9028e6f61790de0832aa3ef03",
+    "sha256": "1ikgans7zqk7c6lj7p0bmd3lr84g6xn7jgm13dj518cg5mscl0r7",
+    "type": "tarball",
+    "url": "https://github.com/edolstra/flake-compat/archive/64a525ee38886ab9028e6f61790de0832aa3ef03.tar.gz",
+    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+  },
+  "git-fuzzy": {
+    "branch": "master",
+    "description": "interactive `git` with the help of `fzf`",
+    "homepage": "",
+    "owner": "bigH",
+    "repo": "git-fuzzy",
+    "rev": "6bf6db61d3bd9a16203130587ccfbc02f4ca9a57",
+    "sha256": "1iivvh1sbfw1h8klcwrhxs4g9cbifg0g2gp0fc8a16qy8dq45mzm",
+    "type": "tarball",
+    "url": "https://github.com/bigH/git-fuzzy/archive/6bf6db61d3bd9a16203130587ccfbc02f4ca9a57.tar.gz",
+    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+  },
+  "git-trim": {
+    "branch": "master",
+    "description": "Utility to delete git branches interactively",
+    "homepage": null,
+    "owner": "dstnbrkr",
+    "repo": "git-trim",
+    "rev": "68322f146a443937e8f59aab4fa3dd0eb976a4db",
+    "sha256": "1y1z6hzfhs42pwkhwfa8qh1508rhx23idnnq1zmaabxyjkh42v01",
+    "type": "tarball",
+    "url": "https://github.com/dstnbrkr/git-trim/archive/68322f146a443937e8f59aab4fa3dd0eb976a4db.tar.gz",
+    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+  },
+  "jsonc.vim": {
+    "branch": "master",
+    "description": "jsonc syntax support for vim",
+    "homepage": null,
+    "owner": "neoclide",
+    "repo": "jsonc.vim",
+    "rev": "b87595ba7f3fa4bdcc8803a2ec72574719fc9fd6",
+    "sha256": "02bgqxi20lmq97s9nnsb1mmjp45fh5a9pbhbs6hl2zmb03spbvpi",
+    "type": "tarball",
+    "url": "https://github.com/neoclide/jsonc.vim/archive/b87595ba7f3fa4bdcc8803a2ec72574719fc9fd6.tar.gz",
+    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+  },
+  "nix-index-database": {
+    "sha256": "08nhi8j2vynfscim2mdaq3dzh5qb91xlk7mp72s6fhvljx54qxwm",
+    "type": "file",
+    "update_type": "github-release",
+    "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-04-10/index-x86_64-linux",
+    "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
+    "version": "2022-04-10"
+  },
+  "npmlock2nix": {
+    "branch": "master",
+    "description": null,
+    "homepage": null,
+    "owner": "tweag",
+    "repo": "npmlock2nix",
+    "rev": "dd2897c3a6e404446704a63f40b9a29fa0acf752",
+    "sha256": "1qim1466qi8a4cz6qh3cwrdkxrrwvrkvrn2gxjlqa5jxvc39cv8v",
+    "type": "tarball",
+    "url": "https://github.com/tweag/npmlock2nix/archive/dd2897c3a6e404446704a63f40b9a29fa0acf752.tar.gz",
+    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+  },
+  "slapper": {
+    "branch": "master",
+    "description": "Simple load testing tool with real-time updated histogram of request timings",
+    "homepage": "",
+    "owner": "ikruglov",
+    "repo": "slapper",
+    "rev": "552f8a34ae9ff4c74dfa7c83c62cda6028ae2f29",
+    "sha256": "0zaz30mkmnahvv79j59bx1c6d6l9i0729qqfbmijpr44h8q5gxvk",
+    "type": "tarball",
+    "url": "https://github.com/ikruglov/slapper/archive/552f8a34ae9ff4c74dfa7c83c62cda6028ae2f29.tar.gz",
+    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+  },
+  "vim-anyfold": {
+    "branch": "master",
+    "description": "Language agnostic vim plugin for folding and motion based on indentation.",
+    "homepage": "",
+    "owner": "pseewald",
+    "repo": "vim-anyfold",
+    "rev": "3ed5d8ccbf0f5031f7c7d2be05aa7ddb4550dc5c",
+    "sha256": "14grfm5vra2lrnilsf6gbfmvn6v4pbi1l94ac713qac592fjq5kv",
+    "type": "tarball",
+    "url": "https://github.com/pseewald/vim-anyfold/archive/3ed5d8ccbf0f5031f7c7d2be05aa7ddb4550dc5c.tar.gz",
+    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+  }
 }

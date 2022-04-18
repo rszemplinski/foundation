@@ -1,40 +1,9 @@
-{ pkgs, lib, config, self, ... }:
-{
-  boot = {
-    loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot = {
-        enable = true;
-        configurationLimit = 5;
-        consoleMode = "auto";
-      };
-      timeout = 1;
-    };
-    tmpOnTmpfs = true;
-    supportedFilesystems = [ "ntfs" ];
-  };
-
+{ pkgs, lib, config, self, ... }: {
   environment.etc."nixpkgs-path".source = pkgs.path;
   nix.nixPath = [ "nixpkgs=/etc/nixpkgs-path" ];
   nix.extraOptions = self.nixConf;
-  # nix.distributedBuilds = true;
-  nix.buildMachines = [{
-    hostName = "eu.nixbuild.net";
-    system = "x86_64-linux";
-    maxJobs = 100;
-    supportedFeatures = [ "benchmark" "big-parallel" ];
-  }];
-  programs.ssh.extraConfig = ''
-    Host eu.nixbuild.net
-      PubkeyAcceptedKeyTypes ssh-ed25519
-      IdentityFile /home/keith/.ssh/id_ed25519
-  '';
-  programs.ssh.knownHosts = {
-    nixbuild = {
-      extraHostNames = [ "eu.nixbuild.net" ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIQCZc54poJ8vqawd8TraNryQeJnvH1eLpIDgbiqymM";
-    };
-  };
+  programs.ssh.extraConfig = "";
+  programs.ssh.knownHosts = { };
   networking.networkmanager.enable = true;
 
   hardware.enableRedistributableFirmware = true;
@@ -56,49 +25,21 @@
 
   security.rtkit.enable = true;
   services = {
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
     dbus.packages = with pkgs; [ dconf ];
-    localtime.enable = true;
     chrony.enable = true;
     tlp.enable = false;
     logind.lidSwitch = "ignore";
     journald.extraConfig = "SystemMaxUse=100M";
-    xserver.displayManager = if !config.services.xserver.enable then { } else {
-      defaultSession = "none+xsession";
-      autoLogin = {
-        enable = true;
-        user = "keith";
-      };
-      session = [
-        {
-          manage = "window";
-          name = "xsession";
-          start = "exec ~/.xsession";
-        }
-      ];
-      lightdm.enable = true;
-    };
-    autorandr.enable = true;
-    earlyoom.enable = true;
   };
 
   users = {
-    users.keith = {
+    users."ryan.szemplinski" = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "adbusers" "docker" "vboxusers" "video" "vboxsf" ];
+      extraGroups = [ "wheel" ];
     };
-    users.localtimed.group = "localtimed"; # FIXME localtime service requires this now
-    users.localtimed.isSystemUser = true;
-    groups.localtimed = { };
   };
 
   security.sudo.wheelNeedsPassword = false;
   system.stateVersion = "21.11";
   programs.command-not-found.enable = false;
-  programs.steam.enable = lib.mkDefault true;
 }

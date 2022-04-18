@@ -1,3 +1,0 @@
-#!/bin/sh
-# with-packages coreutils
-exec dd iflag=fullblock oflag=direct conv=fsync bs=4M of=$@

@@ -1,75 +1,53 @@
-{ pkgs
-, config
-, self
-, username
-, homeDirectory
-, isNixOS
-, isGraphical
-, host
-, ...
+{ pkgs, config, self, username, homeDirectory, isNixOS, isGraphical, host, ...
 }:
-with builtins; with pkgs; with mylib; {
+with builtins;
+with pkgs;
+with mylib; {
   home.packages = with pkgs;
-    drvsExcept
-      {
-        core = {
-          inherit
-            acpi atool banner bash-completion bashInteractive bc binutils
-            borgbackup bvi bzip2 cacert coreutils-full cowsay curl diffutils
-            dos2unix ed fd file findutils gawk gnugrep gnused gnutar gzip
-            inetutils iproute2 iputils ldns less libarchive libnotify loop lsof
-            man-pages moreutils nano ncdu netcat-gnu niv nix-wrapped nix-tree
-            nmap openssh p7zip patch perl pigz procps progress pv ranger
-            ripgrep rlwrap rsync sd socat strace time unzip usbutils watch wget
-            which xdg_utils xxd xz zip bitwarden-cli libqalculate youtube-dl
-            speedtest-cli tldr nix-top nixos-install-tools better-comma dogdns
-            ;
-        };
-        ${attrIf isGraphical "graphical"} = {
-          graphical-core = {
-            inherit
-              dzen2 graphviz i3-easyfocus i3lock imagemagick7 sway term nsxiv
-              xclip xdotool xsel xterm maim
-              ;
-            inherit (xorg) xdpyinfo xev xfontsel xmodmap;
-          };
-          inherit
-            ffmpeg-full mediainfo pavucontrol sox qtbr breeze-icons
-            signal-desktop discord zoom-us dejavu_fonts dejavu_fonts_nerd
-            zathura
-            ;
-        };
-        development = {
-          inherit
-            bat colordiff ctags dhall git-trim gron highlight xh icdiff jq
-            crystal nim nimlsp nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
-            solargraph watchexec yarn yarn-bash-completion nodejs_latest gh
-            git-ignore git-fuzzy black terraform-ls cachix nle concurrently
-            arduino tasknix
-            ;
-          inherit (nodePackages) npm-check-updates prettier;
-        };
-        inherit nr switch-to-configuration;
-        inherit nle-cfg;
-        bin-aliases = attrValues bin-aliases;
-      }
-      {
-        ${attrIf isDarwin "darwin"} = {
-          inherit
-            diffoscope i3-easyfocus iproute2 iputils loop pavucontrol
-            strace sway nsxiv usbutils breeze-icons dzen2 zoom-us maim
-            acpi progress xdotool dejavu_fonts_nerd qtbr ffmpeg youtube-dl
-            ;
-        };
+    drvsExcept {
+      core = {
+        inherit acpi atool banner bash-completion bashInteractive bc binutils
+          borgbackup bvi bzip2 cacert coreutils-full cowsay curl diffutils
+          dos2unix ed fd file findutils gawk gnugrep gnused gnutar gzip
+          inetutils iproute2 iputils ldns less libarchive libnotify loop lsof
+          man-pages moreutils nano ncdu netcat-gnu niv nix-wrapped nix-tree nmap
+          openssh p7zip patch perl pigz procps progress pv ranger ripgrep rlwrap
+          rsync sd socat strace time unzip usbutils watch wget which xdg_utils
+          xxd xz zip bitwarden-cli libqalculate youtube-dl speedtest-cli tldr
+          nix-top nixos-install-tools better-comma dogdns;
       };
+      ${attrIf isGraphical "graphical"} = {
+        graphical-core = {
+          inherit dzen2 graphviz i3-easyfocus i3lock imagemagick7 sway term
+            nsxiv xclip xdotool xsel xterm maim;
+          inherit (xorg) xdpyinfo xev xfontsel xmodmap;
+        };
+        inherit ffmpeg-full mediainfo pavucontrol sox qtbr breeze-icons
+          signal-desktop discord zoom-us dejavu_fonts dejavu_fonts_nerd zathura;
+      };
+      development = {
+        inherit bat colordiff ctags dhall git-trim gron highlight xh icdiff jq
+          crystal nim nimlsp nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
+          solargraph watchexec yarn yarn-bash-completion nodejs_latest gh
+          git-ignore git-fuzzy black terraform-ls cachix nle concurrently
+          arduino tasknix;
+        inherit (nodePackages) npm-check-updates prettier;
+      };
+      inherit nr switch-to-configuration;
+      inherit nle-cfg;
+      bin-aliases = attrValues bin-aliases;
+    } {
+      ${attrIf isDarwin "darwin"} = {
+        inherit diffoscope i3-easyfocus iproute2 iputils loop pavucontrol strace
+          sway nsxiv usbutils breeze-icons dzen2 zoom-us maim acpi progress
+          xdotool dejavu_fonts_nerd qtbr ffmpeg youtube-dl;
+      };
+    };
 
   home = {
     inherit username homeDirectory;
-    keyboard.options = words "ctrl:nocaps ctrl:swap_rwin_rctl";
     sessionVariables = {
-      BROWSER = "firefox";
       BUGSNAG_RELEASE_STAGE = "local";
-      DBTUNNELUSER = "keith";
       EDITOR = "nvim";
       EMAIL = "${userName} <${userEmail}>";
       ESCDELAY = 25;
@@ -80,7 +58,6 @@ with builtins; with pkgs; with mylib; {
       RXVT_SOCKET = "$XDG_RUNTIME_DIR/urxvtd";
       SSH_ASKPASS = null;
       VISUAL = config.home.sessionVariables.EDITOR;
-      _JAVA_AWT_WM_NONREPARENTING = 1;
       npm_config_audit = "false";
       npm_config_cache = "$HOME/.cache/npm";
       npm_config_save_prefix = " ";
@@ -89,8 +66,6 @@ with builtins; with pkgs; with mylib; {
       BUNDLE_USER_CACHE = "$XDG_CACHE_HOME/bundle";
       BUNDLE_USER_PLUGIN = "$XDG_DATA_HOME/bundle";
       RLWRAP_HOME = "$XDG_DATA_HOME/rlwrap";
-      SOLARGRAPH_CACHE = "$XDG_CACHE_HOME/solargraph";
-      PBGOPY_SERVER = "http://kwbauson.com:9090/";
     };
   };
 
@@ -99,7 +74,6 @@ with builtins; with pkgs; with mylib; {
   programs = {
     home-manager.enable = true;
     home-manager.path = inputs.home-manager.outPath;
-    firefox.enable = true;
     bash = {
       enable = true;
       inherit (config.home) sessionVariables;
@@ -115,11 +89,15 @@ with builtins; with pkgs; with mylib; {
         grep = "grep --color -I";
         rg = "rg --color=always -S --hidden --no-require-git --glob '!/.git/'";
         ncdu = "ncdu --color dark -ex";
-        wrun = "watchexec --debounce 50 --no-shell --clear --restart --signal SIGTERM -- ";
+        wrun =
+          "watchexec --debounce 50 --no-shell --clear --restart --signal SIGTERM -- ";
         root-symlinks = with {
-          paths = words ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local";
-        }; "sudo ln -sft /root ${homeDirectory}/{${concatStringsSep "," paths}}";
-        qemu = ", qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
+          paths = words
+            ".bash_profile .bashrc .inputrc .nix-profile .profile .config .local";
+        };
+          "sudo ln -sft /root ${homeDirectory}/{${concatStringsSep "," paths}}";
+        qemu =
+          ", qemu-system-x86_64 -net nic,vlan=1,model=pcnet -net user,vlan=1 -m 3G -vga std -enable-kvm";
       };
       initExtra = prefixIf (!isNixOS) ''
         if command -v nix &> /dev/null;then
@@ -213,40 +191,6 @@ with builtins; with pkgs; with mylib; {
     ssh = {
       enable = true;
       compression = true;
-      extraConfig = ''
-        Host kwbauson.com
-          User keith
-        Host gitlab.com
-          UpdateHostKeys no
-      '';
-    };
-    tmux = {
-      enable = true;
-      customPaneNavigationAndResize = true;
-      escapeTime = 0;
-      historyLimit = 65535;
-      keyMode = "vi";
-      reverseSplit = true;
-      secureSocket = false;
-      sensibleOnTop = false;
-      shortcut = "s";
-      baseIndex = 1;
-      extraConfig = ''
-        bind -n M-C-k send-keys -R \; clear-history
-        set -g set-titles on
-        set -ga terminal-overrides ",*-256color:RGB"
-        set -g status off
-        set -g status-position top
-        set -g window-status-current-format "#[fg=black]#[bg=green] #I #[bg=blue]#[fg=brightwhite] #W #[fg=brightblack]#[bg=black]"
-        set -g window-status-format "#[fg=black]#[bg=yellow] #I #[bg=brightblack]#[fg=brightwhite] #W #[fg=brightblack]#[bg=black]"
-        set -g status-fg colour1
-        set -g status-bg colour0
-        set -g window-status-separator ""
-        set -g status-left ""
-        set -g status-right ""
-        set -g default-command "''${SHELL}"
-      '';
-      plugins = with tmuxPlugins; [ jump ];
     };
     neovim = {
       enable = true;
@@ -254,31 +198,39 @@ with builtins; with pkgs; with mylib; {
       extraConfig = readFile ./init.vim;
       plugins = with rec {
         plugins = with vimPlugins; {
-          inherit
-            conflict-marker-vim fzf-vim nvim-scrollview quick-scope
+          inherit conflict-marker-vim fzf-vim nvim-scrollview quick-scope
             tcomment_vim vim-airline vim-bbye vim-better-whitespace
             vim-code-dark vim-easymotion vim-fugitive vim-lastplace
             vim-multiple-cursors vim-peekaboo vim-polyglot vim-sensible
             vim-startify vim-vinegar
 
             coc-nvim coc-eslint coc-git coc-json coc-lists coc-prettier
-            coc-solargraph coc-tsserver coc-pyright coc-explorer
-            ;
+            coc-solargraph coc-tsserver coc-pyright coc-explorer;
         };
-        makeExtraPlugins = map (name: vimUtils.buildVimPlugin rec {
-          pname = name;
-          version = src.version or src.rev or "unversioned";
-          src = sources.${name};
-        });
-      }; attrValues plugins
-        ++ makeExtraPlugins [ "jsonc.vim" "vim-anyfold" ]
+        makeExtraPlugins = map (name:
+          vimUtils.buildVimPlugin rec {
+            pname = name;
+            version = src.version or src.rev or "unversioned";
+            src = sources.${name};
+          });
+      };
+        attrValues plugins ++ makeExtraPlugins [ "jsonc.vim" "vim-anyfold" ]
         ++ optional (!isDarwin) vimPlugins.vim-devicons;
     };
     htop = {
       enable = true;
       settings = with config.lib.htop; {
         account_guest_in_cpu_meter = true;
-        fields = with fields; [ PID USER STATE PERCENT_CPU PERCENT_MEM M_RESIDENT STARTTIME COMM ];
+        fields = with fields; [
+          PID
+          USER
+          STATE
+          PERCENT_CPU
+          PERCENT_MEM
+          M_RESIDENT
+          STARTTIME
+          COMM
+        ];
         header_margin = false;
         hide_userland_threads = true;
         hide_kernel_threads = true;
@@ -294,25 +246,15 @@ with builtins; with pkgs; with mylib; {
         vim_mode = true;
       };
     };
-    alacritty = {
-      enable = true;
-    };
-    urxvt = {
-      enable = !isDarwin && isGraphical;
-      extraConfig.reverseVideo = true;
-      extraConfig.termName = "xterm-256color";
-      fonts = [ "xft:DejaVuSansMono Nerd Font Mono:size=12" ];
-      scroll.bar.enable = false;
-      scroll.lines = 0;
-      iso14755 = false;
-    };
     git = with {
       gs = text:
-        let script = writeBash "git-script" ''
-          set -eo pipefail
-          cd -- ''${GIT_PREFIX:-.}
-          ${text}
-        ''; in "! ${script}";
+        let
+          script = writeBash "git-script" ''
+            set -eo pipefail
+            cd -- ''${GIT_PREFIX:-.}
+            ${text}
+          '';
+        in "! ${script}";
       tmpGitIndex = ''
         export GIT_INDEX_FILE=$(mktemp)
         index=$(git rev-parse --show-toplevel)/.git/index
@@ -338,9 +280,11 @@ with builtins; with pkgs; with mylib; {
           git --no-pager stash list
         '';
         brf = gs "git f --quiet && git br";
-        default = gs "git symbolic-ref refs/remotes/origin/HEAD | sed s@refs/remotes/origin/@@";
+        default = gs
+          "git symbolic-ref refs/remotes/origin/HEAD | sed s@refs/remotes/origin/@@";
         branch-name = "rev-parse --abbrev-ref HEAD";
-        gone = gs ''git branch -vv | sed -En "/: gone]/s/^..([^[:space:]]*)\s.*/\1/p"'';
+        gone = gs
+          ''git branch -vv | sed -En "/: gone]/s/^..([^[:space:]]*)\s.*/\1/p"'';
         rmg = gs ''
           gone=$(git gone)
           echo About to remove branches: $gone
@@ -379,7 +323,8 @@ with builtins; with pkgs; with mylib; {
         unhide = "update-index --no-skip-worktree";
         l = "log";
         lg = gs "git lfo && git mo";
-        lfo = gs ''git f && git log HEAD..origin/$(git branch-name) --no-merges --reverse'';
+        lfo = gs
+          "git f && git log HEAD..origin/$(git branch-name) --no-merges --reverse";
         p = "put";
         fp = gs ''
           set -e
@@ -397,8 +342,9 @@ with builtins; with pkgs; with mylib; {
         put = gs ''git push --set-upstream origin $(git branch-name) "$@"'';
         ro = gs ''git reset --hard origin/$(git branch-name) "$@"'';
         ros = gs "git stash && git ro && git stash pop";
-        rt = gs ''git reset --hard ''${1:-HEAD} && git clean -d'';
-        s = gs "git br && git -c color.status=always status | grep -E --color=never '^\\s\\S|:$' || true";
+        rt = gs "git reset --hard \${1:-HEAD} && git clean -d";
+        s = gs
+          "git br && git -c color.status=always status | grep -E --color=never '^\\s\\S|:$' || true";
         sf = gs ''git f --quiet && git s "$@"'';
       };
       inherit userName userEmail;
@@ -423,243 +369,9 @@ with builtins; with pkgs; with mylib; {
       defaultOptions = words "--ansi --reverse --multi --filepath-word";
     };
     lesspipe.enable = true;
-    rofi = {
-      enable = isNixOS && isGraphical;
-      theme = "solarized";
-      location = "top";
-      extraConfig = {
-        show-icons = true;
-        scroll-method = 1;
-        kb-row-tab = "";
-        kb-row-select = "Tab";
-        monitor = "-1";
-      };
-    };
     vscode.enable = isGraphical;
     # vscode.extensions = with vscode-extensions; [ ms-vsliveshare.vsliveshare ];
-    mpv.enable = isGraphical && isLinux;
-    qutebrowser = {
-      enable = isGraphical && isLinux;
-      loadAutoconfig = true;
-      aliases = {
-        h = "help";
-        q = "quit";
-        w = "session-save";
-        wq = "quit --save";
-      };
-      searchEngines = {
-        DEFAULT = "https://www.google.com/search?q={}";
-        aur = "https://aur.archlinux.org/packages/?K={}";
-        aw = "https://wiki.archlinux.org/index.php?search={}";
-        g = "https://www.google.com/search?q={}";
-        nw = "https://nixos.wiki/index.php?search={}&go=Go";
-        tv = "https://www.google.com/search?q=site:tvtropes.org+{}";
-        w = "https://en.wikipedia.org/wiki/Special:Search?search={}";
-        yt = "http://www.youtube.com/results?search_query={}";
-        b = "https://www.biblegateway.com/passage/?version=NLT&search={}";
-      };
-      settings = {
-        confirm_quit = [ "downloads" ];
-        new_instance_open_target = "window";
-        session.default_name = "default";
-        auto_save.session = true;
-        content.cache.size = null;
-        content.fullscreen.window = true;
-        content.geolocation = false;
-        content.pdfjs = true;
-        completion.cmd_history_max_items = -1;
-        completion.height = "25%";
-        completion.show = "auto";
-        completion.web_history.exclude = [ "about:blank" ];
-        completion.open_categories = [ "bookmarks" "history" ];
-        downloads.remove_finished = 1000;
-        hints.chars = "asdfghjkl;qwertyuiopzxcvbnm";
-        hints.scatter = false;
-        hints.uppercase = true;
-        input.forward_unbound_keys = "none";
-        spellcheck.languages = [ "en-US" ];
-        statusbar.position = "top";
-        statusbar.widgets = [ "keypress" "url" "scroll" "history" "progress" ];
-        tabs.show = "multiple";
-        tabs.tabs_are_windows = true;
-        url.default_page = "about:blank";
-        url.open_base_url = true;
-        url.start_pages = [ "about:blank" ];
-        window.title_format = "{perc}{current_title}";
-        colors.webpage.preferred_color_scheme = "dark";
-      };
-      keyBindings.normal = {
-        ";d" = "hint all delete";
-        ";e" = "hint inputs";
-        ";f" = "hint all tab-fg";
-        ";r" = "hint --rapid all tab-bg";
-        ";y" = "hint links yank-primary";
-        "<Alt+h>" = "scroll left";
-        "<Alt+j>" = "scroll down";
-        "<Alt+k>" = "scroll up";
-        "<Alt+l>" = "scroll right";
-        "<Ctrl+e>" = "scroll-px 0 40";
-        "<Ctrl+y>" = "scroll-px 0 -40";
-        "<Down>" = "scroll down";
-        "<Shift+Space>" = "scroll-page 0 -1";
-        "<Space>" = "scroll-page 0 1";
-        "<Up>" = "scroll up";
-        F = "hint all tab-bg";
-        O = "set-cmd-text :open {url:pretty}";
-        P = "open -t {primary}";
-        T = "set-cmd-text :open -t {url:pretty}";
-        Y = "yank";
-        b = "set-cmd-text -s :open -b";
-        c = "tab-clone";
-        gb = "open qute:bookmarks";
-        gp = "spawn -u login-fill";
-        gq = "open https://github.com/qutebrowser/qutebrowser/commits/master";
-        gc = "open https://github.com/kwbauson/cfg";
-        gn = "open https://github.com/NixOS/nix/commits/master";
-        gN = "open https://github.com/NixOS/nixpkgs/commits/master";
-        gs = "set";
-        gv = "open qute:version";
-        h = "scroll-px -40 0";
-        j = "scroll-px 0 40";
-        k = "scroll-px 0 -40";
-        l = "scroll-px 40 0";
-        p = "open {primary}";
-        s = "stop";
-        t = "set-cmd-text -s :open -t";
-        w = "open -t";
-        y = "yank --sel";
-        u = "undo --window";
-      };
-      keyBindings.insert = {
-        "<Ctrl+h>" = "fake-key <backspace>";
-        "<Ctrl+j>" = "fake-key <enter>";
-        "<Ctrl+m>" = "fake-key <enter>";
-        "<Ctrl+u>" = "fake-key <shift-home><backspace>";
-        "<Ctrl+w>" = "fake-key <ctrl-backspace>";
-      };
-      extraConfig = ''
-        config.unbind("<Ctrl+w>")
-      '';
-    };
-  };
-  xdg = {
-    enable = true;
-    ${attrIf isNixOS "mimeApps"}.enable = true;
-    ${attrIf isNixOS "userDirs"} = {
-      enable = true;
-      desktop = "$HOME";
-      documents = "$HOME";
-      download = "$HOME";
-      music = "$HOME";
-      pictures = "$HOME";
-      templates = "$HOME";
-      videos = "$HOME";
-    };
-    configFile = {
-      "ranger/rc.conf".text = ''
-        source ${homeDirectory}/.nix-profile/share/doc/ranger/config/rc.conf
-        set vcs_aware true
-        set preview_images_method urxvt
-        map D delete
-        map Q quit!
-        map ! shell bash
-      '';
-      "ranger/plugins/ranger_devicons".source = sources.ranger_devicons;
-      "emborg/settings".text = ''
-        configurations = "default"
-        encryption = "none"
-        compression = "auto,zstd"
-        repository = "keith@kwbauson.com:bak/{host_name}"
-        archive = "{host_name}-{{now}}"
-        one_file_system = False
-        exclude_caches = True
-        prune_after_create = True
-        keep_within = "1d"
-        keep_daily = 1
-        keep_weekly = 1
-        keep_monthly = 1
-        keep_yearly = 1
-      '';
-      "emborg/default".text = ''
-        src_dirs = "${optionalString isNixOS "/etc/nixos"} ~".split()
-        excludes = """
-        ${mapLines (l: prefixIf (!hasPrefix "*" l) "~/" l) (readFile ./ignore)}
-        """
-      '';
-    };
-    dataFile = {
-      "qutebrowser/userscripts/login-fill" = {
-        executable = true;
-        source = writeBash "login-fill" ''
-          set -e
-          if [[ -e ~/cfg/secrets/bw-session ]];then
-            export BW_SESSION=$(< ~/cfg/secrets/bw-session)
-          fi
-          items=$(bw list items --url "$QUTE_URL" | jq 'map(.login) | map({ username, password, url: .uris[0].uri })')
-          count=$(echo "$items" | jq length)
-          if [[ $count -eq 1 ]];then
-            choice=1
-          elif [[ $count -gt 1 ]];then
-            choices=$(echo "$items" | jq -r 'map([.username, .url]) | map(join(" | ")) | join("\n")' | nl)
-            choice=$(echo "$choices" | rofi -dmenu | awk '{ print $1 }')
-          else
-            echo no matching logins
-            exit 1
-          fi
-          if [[ -n $choice ]];then
-            item=$(echo "$items" | jq ".[$choice - 1]")
-            username=$(echo "$item" | jq -r '.username')
-            password=$(echo "$item" | jq -r '.password')
-            echo "jseval -q document.querySelectorAll('input[type=password]')[0].focus()" > "$QUTE_FIFO"
-            echo "fake-key $password<shift-tab>$username<tab>" > "$QUTE_FIFO"
-          fi
-        '';
-      };
-      "xmonad/.keep".text = "";
-    };
   };
 
-  home.file.".irbrc".text = ''
-    IRB.conf[:USE_READLINE] = true
-    IRB.conf[:SAVE_HISTORY] = 2_000_000
-    IRB.conf[:HISTORY_FILE] = "#{ENV['XDG_DATA_HOME']}/irb_history"
-  '';
-
-  gtk.enable = isLinux;
-  gtk.theme.name = "Adwaita-dark";
-  gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
-  qt.enable = isLinux;
-  qt.style.name = "adwaita-dark";
   dconf.enable = false;
-
-  xsession = {
-    enable = isNixOS && isGraphical;
-    initExtra = ''
-      xmodmap ${writeText "Xmodmap" ''
-        remove mod1 = Alt_L
-        keycode 64 = Escape
-        ${optionalString (host == "keith-xps") "keycode 105 = Super_R"}
-        ${optionalString (host == "keith-desktop") ''
-          keycode 134 = Super_R
-          keycode 105 = Control_R
-        ''}
-      ''}
-      xmodmap ${writeText "Xmodmap-fix-modifiers" ''
-        remove control = Super_R
-        remove mod4 = Control_R
-        add control = Control_R
-        add mod4 = Super_R
-      ''}
-      xsetroot -solid black
-      xsetroot -cursor_name left_ptr
-      urxvtd -q -o -f
-    '';
-    windowManager = {
-      i3 = {
-        enable = isNixOS && isGraphical;
-        config = null;
-        extraConfig = readFile ./i3-config;
-      };
-    };
-  };
 }
