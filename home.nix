@@ -11,10 +11,10 @@ with mylib; {
           dos2unix ed fd file findutils gawk gnugrep gnused gnutar gzip
           inetutils iproute2 iputils ldns less libarchive libnotify loop lsof
           man-pages moreutils nano ncdu netcat-gnu niv nix-wrapped nix-tree nmap
-          openssh p7zip patch perl pigz procps progress pv ranger ripgrep rlwrap
-          rsync sd socat strace time unzip usbutils watch wget which xdg_utils
-          xxd xz zip bitwarden-cli libqalculate youtube-dl speedtest-cli tldr
-          nix-top nixos-install-tools better-comma dogdns;
+          openssh p7zip patch perl pigz procps progress pv ripgrep rlwrap rsync
+          sd socat strace time unzip usbutils watch wget which xxd xz zip
+          bitwarden-cli libqalculate speedtest-cli tldr nix-top cmake
+          nixos-install-tools;
       };
       ${attrIf isGraphical "graphical"} = {
         graphical-core = {
@@ -27,45 +27,24 @@ with mylib; {
       };
       development = {
         inherit bat colordiff ctags dhall git-trim gron highlight xh icdiff jq
-          crystal nim nimlsp nixpkgs-fmt rnix-lsp-unstable shellcheck shfmt
-          solargraph watchexec yarn yarn-bash-completion nodejs_latest gh
-          git-ignore git-fuzzy black terraform-ls cachix nle concurrently
-          arduino tasknix;
+          crystal nixpkgs-fmt shellcheck shfmt watchexec yarn
+          yarn-bash-completion nodejs_latest gh git-ignore git-fuzzy
+          terraform-ls cachix nle concurrently tasknix;
         inherit (nodePackages) npm-check-updates prettier;
+
       };
       inherit nr switch-to-configuration;
       inherit nle-cfg;
       bin-aliases = attrValues bin-aliases;
-    } {
-      ${attrIf isDarwin "darwin"} = {
-        inherit diffoscope i3-easyfocus iproute2 iputils loop pavucontrol strace
-          sway nsxiv usbutils breeze-icons dzen2 zoom-us maim acpi progress
-          xdotool dejavu_fonts_nerd qtbr ffmpeg youtube-dl;
-      };
-    };
+    } { ${attrIf isDarwin "darwin"} = { inherit progress; }; };
 
   home = {
     inherit username homeDirectory;
     sessionVariables = {
-      BUGSNAG_RELEASE_STAGE = "local";
-      EDITOR = "nvim";
-      EMAIL = "${userName} <${userEmail}>";
-      ESCDELAY = 25;
-      LESS = "-iR";
-      LESSHISTFILE = "$XDG_DATA_HOME/less_history";
+      HISTCONTROL = "ignoreboth";
       PAGER = "less";
-      RANGER_LOAD_DEFAULT_RC = "FALSE";
-      RXVT_SOCKET = "$XDG_RUNTIME_DIR/urxvtd";
-      SSH_ASKPASS = null;
-      VISUAL = config.home.sessionVariables.EDITOR;
-      npm_config_audit = "false";
-      npm_config_cache = "$HOME/.cache/npm";
-      npm_config_save_prefix = " ";
-      NODE_REPL_HISTORY = "$XDG_DATA_HOME/node_repl_history";
-      BUNDLE_USER_CONFIG = "$XDG_CONFIG_HOME/bundle";
-      BUNDLE_USER_CACHE = "$XDG_CACHE_HOME/bundle";
-      BUNDLE_USER_PLUGIN = "$XDG_DATA_HOME/bundle";
-      RLWRAP_HOME = "$XDG_DATA_HOME/rlwrap";
+      LESS = "-iR";
+      EDITOR = "nvim";
     };
   };
 
@@ -74,7 +53,7 @@ with mylib; {
   programs = {
     home-manager.enable = true;
     home-manager.path = inputs.home-manager.outPath;
-    bash = {
+    zsh = {
       enable = true;
       inherit (config.home) sessionVariables;
       historyFileSize = -1;
@@ -150,10 +129,33 @@ with mylib; {
         ___git_complete g __git_main
       '';
       profileExtra = ''
-        [[ -e ~/cfg/secrets/bw-session ]] && export BW_SESSION=$(< ~/cfg/secrets/bw-session)
         [[ -e ~/cfg/secrets/github-token ]] && export GITHUB_TOKEN=$(< ~/cfg/secrets/github-token)
       '';
     };
+
+    starship = {
+      enable = true;
+      settings = {
+        add_newline = false;
+        golang = {
+          style = "fg:#00ADD8";
+          symbol = "go ";
+        };
+        directory.style = "fg:#d442f5";
+        nix_shell = {
+          pure_msg = "";
+          impure_msg = "";
+          format = "via [$symbol$state]($style) ";
+        };
+
+        # disabled plugins
+        aws.disabled = true;
+        cmd_duration.disabled = true;
+        gcloud.disabled = true;
+        package.disabled = true;
+      };
+    };
+
     readline = {
       enable = true;
       variables = {
@@ -368,9 +370,8 @@ with mylib; {
       defaultCommand = "fd -tf -c always -H --ignore-file ${./ignore} -E .git";
       defaultOptions = words "--ansi --reverse --multi --filepath-word";
     };
-    lesspipe.enable = true;
+    dircolors.enable = true;
     vscode.enable = isGraphical;
-    # vscode.extensions = with vscode-extensions; [ ms-vsliveshare.vsliveshare ];
   };
 
   dconf.enable = false;

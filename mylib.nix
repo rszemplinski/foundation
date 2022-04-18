@@ -38,7 +38,7 @@ cli // generators // lib // builtins // rec {
   drvsExcept = x: e:
     with { excludeNames = concatMap attrNames (attrValues e); };
     flatten (drvs (filterAttrsRecursive (n: _: !elem n excludeNames) x));
-  userName = "Ryan Szemplinski";
+  userName = (builtins.getEnv "USER");
   userEmail = "rszemplinski22@gmail.com";
   nixpkgs-branch =
     let urlParts = splitString "/" (import ./flake.nix).inputs.nixpkgs.url;

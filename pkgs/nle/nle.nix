@@ -36,9 +36,9 @@ with self.lib; {
     out = override (inputs.mach-nix.lib.${system}.mkPython {
       ignoreDataOutdated = true;
       ignoreCollisions = true;
-      requirements = excludeLines (hasPrefix "itomate") ''
-        ${read "requirements.txt"}
-        ${read "requirements.dev.txt"}
+      requirements = ''
+        black
+        ipdb
       '';
       _.curtsies.patches = [ ];
     }) { name = "pip-env"; };

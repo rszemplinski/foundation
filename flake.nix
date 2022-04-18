@@ -112,15 +112,15 @@
           pie-mac = lib.homeConfiguration {
             isNixOS = false;
             system = "x86_64-darwin";
-            username = "ryan.szemplinski";
-            homeDirectory = "/Users/ryan.szemplinski";
+            username = (builtins.getEnv "USER");
+            homeDirectory = (builtins.getEnv "HOME");
             host = "pie-mac";
           };
           pie-mac-m1 = lib.homeConfiguration {
             isNixOS = false;
             system = "aarch64-darwin";
-            username = "ryan.szemplinski";
-            homeDirectory = "/Users/ryan.szemplinski";
+            username = (builtins.getEnv "USER");
+            homeDirectory = (builtins.getEnv "HOME");
             host = "pie-mac";
           };
         };
