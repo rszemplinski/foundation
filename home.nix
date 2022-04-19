@@ -1,43 +1,6 @@
-{ pkgs, config, self, username, homeDirectory, isNixOS, isGraphical, host, ...
-}:
+{ pkgs, packages, lib, ... }:
 with builtins;
-with pkgs;
-with mylib; {
-  home.packages = with pkgs;
-    drvsExcept {
-      core = {
-        inherit acpi atool banner bash-completion bashInteractive bc binutils
-          borgbackup bvi bzip2 cacert coreutils-full cowsay curl diffutils
-          dos2unix ed fd file findutils gawk gnugrep gnused gnutar gzip
-          inetutils iproute2 iputils ldns less libarchive libnotify loop lsof
-          man-pages moreutils nano ncdu netcat-gnu niv nix-wrapped nix-tree nmap
-          openssh p7zip patch perl pigz procps progress pv ripgrep rlwrap rsync
-          sd socat strace time unzip usbutils watch wget which xxd xz zip
-          bitwarden-cli libqalculate speedtest-cli tldr nix-top cmake
-          nixos-install-tools;
-      };
-      ${attrIf isGraphical "graphical"} = {
-        graphical-core = {
-          inherit dzen2 graphviz i3-easyfocus i3lock imagemagick7 sway term
-            nsxiv xclip xdotool xsel xterm maim;
-          inherit (xorg) xdpyinfo xev xfontsel xmodmap;
-        };
-        inherit ffmpeg-full mediainfo pavucontrol sox qtbr breeze-icons
-          signal-desktop discord zoom-us dejavu_fonts dejavu_fonts_nerd zathura;
-      };
-      development = {
-        inherit bat colordiff ctags dhall git-trim gron highlight xh icdiff jq
-          crystal nixpkgs-fmt shellcheck shfmt watchexec yarn
-          yarn-bash-completion nodejs_latest gh git-ignore git-fuzzy
-          terraform-ls cachix nle concurrently tasknix;
-        inherit (nodePackages) npm-check-updates prettier;
-
-      };
-      inherit nr switch-to-configuration;
-      inherit nle-cfg;
-      bin-aliases = attrValues bin-aliases;
-    } { ${attrIf isDarwin "darwin"} = { inherit progress; }; };
-
+with pkgs; {
   home = {
     inherit username homeDirectory;
     sessionVariables = {
@@ -52,12 +15,9 @@ with mylib; {
 
   programs = {
     home-manager.enable = true;
-    home-manager.path = inputs.home-manager.outPath;
     zsh = {
       enable = true;
       inherit (config.home) sessionVariables;
-      historyFileSize = -1;
-      historySize = -1;
       shellAliases = {
         l = "ls -lh";
         ll = "l -a";
@@ -309,7 +269,6 @@ with mylib; {
         df = gs ''
           ${tmpGitIndex}
           git add -A
-          git -c core.pager='${nr delta} --dark' diff --staged "$@" || true
         '';
         dfo = gs ''git f && git df "origin/''${1:-$(git branch-name)}"'';
         f = "fetch --all";
@@ -335,7 +294,6 @@ with mylib; {
           logb=$(mktemp)
           git log origin/$(git branch-name) > "$loga"
           git log > "$logb"
-          ${nr delta} "$loga" "$logb" || true
           rm "$loga" "$logb"
           read -n1 -p "Continue? [y/n] " continue
           echo
