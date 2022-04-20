@@ -1,0 +1,14 @@
+{
+  "LS_COLORS": {
+    "branch": "master",
+    "description": "A collection of LS_COLORS definitions; needs your contribution!",
+    "homepage": "",
+    "owner": "trapd00r",
+    "repo": "LS_COLORS",
+    "rev": "8b777b6b7e819a60cface024b01b86b748fb15a4",
+    "sha256": "1vw2iy8sigkhal8b2s20db580gwg904q70b93dqnfpj5zf4pwgnq",
+    "type": "tarball",
+    "url": "https://github.com/trapd00r/LS_COLORS/archive/8b777b6b7e819a60cface024b01b86b748fb15a4.tar.gz",
+    "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+  }
+}

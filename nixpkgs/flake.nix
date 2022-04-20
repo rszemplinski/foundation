@@ -1,14 +1,11 @@
 {
-  inputs = {
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-  };
+  inputs = { home-manager.inputs.nixpkgs.follows = "nixpkgs"; };
 
   outputs = { self, nixpkgs, home-manager, flake-utils }:
     let
       username = "ryan.szemplinski";
       homeDirectory = "/Users/ryan.szemplinski";
-    in
-    with builtins;
+    in with builtins;
     flake-utils.lib.eachDefaultSystem (system: {
       packages =
         let inherit (nixpkgs.legacyPackages.${system}.writers) writeBashBin;
@@ -19,9 +16,7 @@
               configuration = {
                 imports = [
                   ({ lib, ... }: {
-                    _module.args = {
-                      inherit self username homeDirectory mylib;
-                    };
+                    _module.args = { inherit self username homeDirectory; };
                   })
                   ./home.nix
                 ];
