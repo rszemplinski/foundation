@@ -1,0 +1,94 @@
+{
+    "flake-compat": {
+      "branch": "master",
+      "description": null,
+      "homepage": null,
+      "owner": "edolstra",
+      "repo": "flake-compat",
+      "rev": "64a525ee38886ab9028e6f61790de0832aa3ef03",
+      "sha256": "1ikgans7zqk7c6lj7p0bmd3lr84g6xn7jgm13dj518cg5mscl0r7",
+      "type": "tarball",
+      "url": "https://github.com/edolstra/flake-compat/archive/64a525ee38886ab9028e6f61790de0832aa3ef03.tar.gz",
+      "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "git-fuzzy": {
+      "branch": "master",
+      "description": "interactive `git` with the help of `fzf`",
+      "homepage": "",
+      "owner": "bigH",
+      "repo": "git-fuzzy",
+      "rev": "6bf6db61d3bd9a16203130587ccfbc02f4ca9a57",
+      "sha256": "1iivvh1sbfw1h8klcwrhxs4g9cbifg0g2gp0fc8a16qy8dq45mzm",
+      "type": "tarball",
+      "url": "https://github.com/bigH/git-fuzzy/archive/6bf6db61d3bd9a16203130587ccfbc02f4ca9a57.tar.gz",
+      "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "git-trim": {
+      "branch": "master",
+      "description": "Utility to delete git branches interactively",
+      "homepage": null,
+      "owner": "dstnbrkr",
+      "repo": "git-trim",
+      "rev": "68322f146a443937e8f59aab4fa3dd0eb976a4db",
+      "sha256": "1y1z6hzfhs42pwkhwfa8qh1508rhx23idnnq1zmaabxyjkh42v01",
+      "type": "tarball",
+      "url": "https://github.com/dstnbrkr/git-trim/archive/68322f146a443937e8f59aab4fa3dd0eb976a4db.tar.gz",
+      "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "jsonc.vim": {
+      "branch": "master",
+      "description": "jsonc syntax support for vim",
+      "homepage": null,
+      "owner": "neoclide",
+      "repo": "jsonc.vim",
+      "rev": "b87595ba7f3fa4bdcc8803a2ec72574719fc9fd6",
+      "sha256": "02bgqxi20lmq97s9nnsb1mmjp45fh5a9pbhbs6hl2zmb03spbvpi",
+      "type": "tarball",
+      "url": "https://github.com/neoclide/jsonc.vim/archive/b87595ba7f3fa4bdcc8803a2ec72574719fc9fd6.tar.gz",
+      "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nix-index-database": {
+      "sha256": "08nhi8j2vynfscim2mdaq3dzh5qb91xlk7mp72s6fhvljx54qxwm",
+      "type": "file",
+      "update_type": "github-release",
+      "url": "https://github.com/Mic92/nix-index-database/releases/download/2022-04-10/index-x86_64-linux",
+      "url_template": "https://github.com/Mic92/nix-index-database/releases/download/<version>/index-x86_64-linux",
+      "version": "2022-04-10"
+    },
+    "npmlock2nix": {
+      "branch": "master",
+      "description": null,
+      "homepage": null,
+      "owner": "tweag",
+      "repo": "npmlock2nix",
+      "rev": "dd2897c3a6e404446704a63f40b9a29fa0acf752",
+      "sha256": "1qim1466qi8a4cz6qh3cwrdkxrrwvrkvrn2gxjlqa5jxvc39cv8v",
+      "type": "tarball",
+      "url": "https://github.com/tweag/npmlock2nix/archive/dd2897c3a6e404446704a63f40b9a29fa0acf752.tar.gz",
+      "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "slapper": {
+      "branch": "master",
+      "description": "Simple load testing tool with real-time updated histogram of request timings",
+      "homepage": "",
+      "owner": "ikruglov",
+      "repo": "slapper",
+      "rev": "552f8a34ae9ff4c74dfa7c83c62cda6028ae2f29",
+      "sha256": "0zaz30mkmnahvv79j59bx1c6d6l9i0729qqfbmijpr44h8q5gxvk",
+      "type": "tarball",
+      "url": "https://github.com/ikruglov/slapper/archive/552f8a34ae9ff4c74dfa7c83c62cda6028ae2f29.tar.gz",
+      "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "vim-anyfold": {
+      "branch": "master",
+      "description": "Language agnostic vim plugin for folding and motion based on indentation.",
+      "homepage": "",
+      "owner": "pseewald",
+      "repo": "vim-anyfold",
+      "rev": "3ed5d8ccbf0f5031f7c7d2be05aa7ddb4550dc5c",
+      "sha256": "14grfm5vra2lrnilsf6gbfmvn6v4pbi1l94ac713qac592fjq5kv",
+      "type": "tarball",
+      "url": "https://github.com/pseewald/vim-anyfold/archive/3ed5d8ccbf0f5031f7c7d2be05aa7ddb4550dc5c.tar.gz",
+      "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+  }
